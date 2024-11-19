@@ -30,5 +30,21 @@ This is a basic Spring Boot application that performs CRUD (Create, Read, Update
 
 1. **Clone the repository**:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/chethann07/registration-crud-repo.git
    ```
+2. **Navigate into the project directory**:
+   ```bash
+   cd your-repo-name
+   ```
+3. **Configure the Database**:
+   ```bash
+   CREATE DATABASE registration;
+   ```
+4. **Update the `application.properties` file with your MySQL database credentials**:
+   ```bash
+   spring.datasource.url=jdbc:mysql://localhost:3306/registration
+   spring.datasource.username=your_username
+   spring.datasource.password=your_password
+   spring.jpa.hibernate.ddl-auto=update
+   ```
+5. **Run the project in the IDE with `RegistrationApplication.java` as the main file**
