@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>User List</title>
+<style>
+@import
+	url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap")
+	;
+
+body {
+	background: rgb(130, 106, 251);
+	font-family: "Poppins", sans-serif;
+	padding: 20px;
+	color: #333;
+}
+
+.container {
+	max-width: 900px;
+	background: #fff;
+	margin: auto;
+	border-radius: 8px;
+	padding: 25px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+header {
+	font-size: 1.8rem;
+	font-weight: 600;
+	text-align: center;
+	margin-bottom: 20px;
+	color: rgb(88, 56, 250);
+}
+
+.btn-update {
+	background-color: #28a745;
+	color: #fff;
+	padding: 5px 15px;
+	border-radius: 5px;
+	font-size: 0.8rem;
+	font-weight: 500;
+	text-decoration: none;
+	transition: all 0.3s ease;
+}
+
+.btn-update:hover {
+	background-color: #218838;
+	box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2);
+}
+
+.btn-delete {
+	background-color: #ff4d4d;
+	color: #fff;
+	padding: 5px 15px;
+	border-radius: 5px;
+	font-size: 0.8rem;
+	font-weight: 500;
+	text-decoration: none;
+	transition: all 0.3s ease;
+}
+
+.btn-delete:hover {
+	background-color: #e60000;
+	box-shadow: 0 4px 10px rgba(255, 77, 77, 0.2);
+}
+
+.btn {
+	background-color: rgb(130, 106, 251);
+	color: #fff;
+	text-decoration: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	font-size: 0.9rem;
+	font-weight: 500;
+	transition: all 0.3s ease;
+	display: inline-block;
+	margin-bottom: 15px;
+}
+
+.btn:hover {
+	background-color: rgb(88, 56, 250);
+	box-shadow: 0 4px 10px rgba(88, 56, 250, 0.2);
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 10px;
+	font-size: 0.9rem;
+}
+
+th, td {
+	padding: 12px 15px;
+	text-align: left;
+	border: 1px solid #ddd;
+}
+
+th {
+	background: rgb(130, 106, 251);
+	color: #fff;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.03rem;
+}
+
+tbody tr:nth-child(odd) {
+	background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+	background-color: #f1f1f1;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+}
+
+tbody td a.btn {
+	padding: 5px 15px;
+	font-size: 0.8rem;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<header>User List</header>
+		<a th:href="@{/addUser}" class="btn">+ Add User</a>
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Phone Number</th>
+					<th>Date of Birth</th>
+					<th>Gender</th>
+					<th>Update</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${users.empty}">
+					<td colspan="8"
+						style="text-align: center; font-weight: bold; color: #555;">
+						No users found. <a th:href="@{/addUser}"
+						style="color: rgb(88, 56, 250); text-decoration: none;">Register
+							a new one</a>.
+					</td>
+				</tr>
+				<tr th:each="user : ${users}">
+					<td th:text="${user.registrationId}"></td>
+					<td th:text="${user.name}"></td>
+					<td th:text="${user.email}"></td>
+					<td th:text="${user.phoneNumber}"></td>
+					<td th:text="${#dates.format(user.dateOfBirth, 'yyyy-MM-dd')}"></td>
+					<td th:text="${user.gender}"></td>
+					<td><a
+						th:href="@{/updateUser/{registrationId}(registrationId=${user.registrationId})}"
+						class="btn-update">Update</a></td>
+					<td><a
+						th:href="@{/deleteUser/{registrationId}(registrationId=${user.registrationId})}"
+						class="btn-delete">Delete</a></td>
+
+				</tr>
+			</tbody>
+
+		</table>
+	</div>
+</body>
+</html>

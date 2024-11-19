@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Register New User</title>
+<style>
+body {
+	font-family: "Poppins", sans-serif;
+	margin: 0;
+	padding: 0;
+	background: rgb(130, 106, 251);
+	color: #333;
+}
+
+.container {
+	max-width: 500px;
+	background: #fff;
+	margin: 50px auto;
+	padding: 20px 30px;
+	border-radius: 8px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+header {
+	text-align: center;
+	font-size: 1.8rem;
+	font-weight: 600;
+	color: rgb(88, 56, 250);
+	margin-bottom: 20px;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.input-box {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.input-box label {
+	font-size: 0.9rem;
+	color: #555;
+}
+
+.input-box input {
+	padding: 10px;
+	font-size: 0.9rem;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	outline: none;
+	transition: border 0.2s ease;
+}
+
+.input-box input:focus {
+	border-color: rgb(130, 106, 251);
+}
+
+.column {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+}
+
+.column .input-box {
+	flex: 1;
+}
+
+.gender-box {
+	margin-top: 15px;
+}
+
+.gender-box h3 {
+	font-size: 1rem;
+	color: #555;
+	margin-bottom: 10px;
+}
+
+.gender-option {
+	display: flex;
+	gap: 15px;
+}
+
+.gender {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.gender input {
+	width: 16px;
+	height: 16px;
+	accent-color: rgb(130, 106, 251);
+	cursor: pointer;
+}
+
+button {
+	background-color: rgb(130, 106, 251);
+	color: #fff;
+	border: none;
+	padding: 10px 15px;
+	font-size: 1rem;
+	font-weight: 500;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	width: 100%;
+}
+
+button:hover {
+	background-color: rgb(88, 56, 250);
+	box-shadow: 0 4px 10px rgba(88, 56, 250, 0.2);
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 0.8rem; 
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgb(130, 106, 251);
+    padding: 8px 12px; 
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    width: auto; 
+}
+
+.back-link:hover {
+	background-color: rgb(88, 56, 250);
+	box-shadow: 0 4px 10px rgba(88, 56, 250, 0.2);
+}
+</style>
+</head>
+<body>
+	<section class="container">
+		<header>Registration Form</header>
+		<form th:action="@{/saveUser}" method="POST" th:object="${user}"
+			class="form">
+			<input type="hidden" th:field="*{registrationId}">
+			<div class="input-box">
+				<label>Full Name</label> <input type="text" th:field="*{name}"
+					placeholder="Enter full name" required />
+			</div>
+			<div class="input-box">
+				<label>Email Address</label> <input type="email" th:field="*{email}"
+					placeholder="Enter email address" required />
+			</div>
+			<div class="column">
+				<div class="input-box">
+					<label>Phone Number</label> <input type="number"
+						th:field="*{phoneNumber}" placeholder="Enter phone number"
+						required />
+				</div>
+				<div class="input-box">
+					<label>Birth Date</label> <input type="date"
+						th:field="*{dateOfBirth}" required />
+				</div>
+			</div>
+			<div class="gender-box">
+				<h3>Gender</h3>
+				<div class="gender-option">
+					<div class="gender">
+						<input type="radio" th:field="*{gender}" value="Male" id="male" />
+						<label for="male">Male</label>
+					</div>
+					<div class="gender">
+						<input type="radio" th:field="*{gender}" value="Female"
+							id="female" /> <label for="female">Female</label>
+					</div>
+					<div class="gender">
+						<input type="radio" th:field="*{gender}" value="Other" id="other" />
+						<label for="other">Prefer not to say</label>
+					</div>
+				</div>
+			</div>
+			<button type="submit">Submit</button>
+		</form>
+		<a th:href="@{/getAllUsers}" class="back-link">Back to Dashboard</a>
+	</section>
+</body>
+</html>
